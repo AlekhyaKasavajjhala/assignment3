@@ -1,0 +1,81 @@
+<html>
+	<head>
+	  <script type="text/javascript">
+		function order()
+		{
+			var qu1=document.getElementById("Q1").value;
+			var qu2=document.getElementById("Q2").value;
+			var qu3=document.getElementById("Q3").value;
+			var qu4=document.getElementById("Q4").value;
+			var cname=document.getElementById("name").value;
+			var gender=document.getElementById("gender").value;
+			var caddress=document.getElementById("address").value;
+			var cpno=document.getElementById("phno").value;
+			var payment=document.getElementById("paymenttype").value;
+			var obj=new XMLHttpRequest();
+			var querystring="cart.php?name="+cname+"&gender="+gender+"&address="+caddress+"&pno="+cpno+"&paymenttype="+payment+"&Q1="+qu1+"&Q2="+qu2+"&Q3="+qu3+"&Q4="+qu4;
+			obj.onreadystatechange=function(){
+				if(obj.readyState==4&&obj.status==200)
+				{
+					document.getElementById("div").innerHTML=obj.responseText;
+				}
+		    };
+		    obj.open("GET",querystring,true);
+		    obj.send();
+		}
+	  </script>
+	</head>
+	<body>
+	<form>
+	    <style>
+
+            table, th, td {
+             border: 1px solid blue;
+ 
+                 border-collapse: collapse;
+            }
+
+        </style>
+        
+		<table id="MyTable">
+		<tr>
+			<th>Product</th>
+			<th>Price</th>
+			<th>Quantity</th>
+		</tr>
+		<tr>
+			<td>Pendrive</td>
+			<td>249</td>
+			<td><input type="text" id="Q1"/></td>
+		</tr>
+		<tr>
+			<td>Wireless Mouse</td>
+			<td>399</td>
+			<td><input type="text" id="Q2"/></td>
+		</tr>
+		<tr>
+			<td>Keyboard</td>
+			<td>949</td>
+			<td><input type="text" id="Q3"/></td>
+		</tr>
+		<tr>
+			<td>Laptop</td>
+			<td>37599</td>
+			<td><input type="text" id="Q4"/></td>
+		</tr>
+		</table>
+		NAME:<input type="text" id="name"/><br>
+		<input type="radio" id="gender" value="male" name="gender" />Male<br>
+		<input type="radio" id="gender" value="female" name="gender"/>Female<br>
+		ADDRESS:<textarea rows="10" col="10" id="address"></textarea><br>
+		PHONENO:<input type="text" id="phno"/><br>
+		<input type="radio" id="paymenttype" value="COD" name="payment"/>COD<br>
+		<input type="radio" id="paymenttype" value="Internet Banking" name="payment"/>Internet Banking<br>
+		<input type="radio" id="paymenttype" value="credit/debit card" name="payment"/>credit/debit card<br>
+		<input type="button" value="submit" onclick="order()"/>
+	</form>
+	<div id="div">
+		<h2>***Details of currently placed order***</h2>
+	</div>
+	</body>
+</html>
